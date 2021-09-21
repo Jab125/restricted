@@ -4,7 +4,8 @@
 	"compatibilityLevel": "JAVA_16",
 	"refmap": "restricted.refmap.json",
 	"mixins": [
-        "TitleScreenMixin"
+        "TitleScreenMixin",
+		"OpenToLanMixin"
 	],
 	"minVersion": "0.8"
 }

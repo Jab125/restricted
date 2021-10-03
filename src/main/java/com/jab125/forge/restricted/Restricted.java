@@ -1,15 +1,21 @@
 package com.jab125.forge.restricted;
 
+import com.jab125.forge.restricted.screens.ConfigScreen;
+import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.IExtensionPoint;
 import net.minecraftforge.fml.InterModComms;
+import net.minecraftforge.fml.ModList;
+import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModProcessEvent;
+import net.minecraftforge.fmlclient.ConfigGuiHandler;
 import net.minecraftforge.fmlserverevents.FMLServerStartingEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
@@ -21,8 +27,11 @@ import java.util.stream.Collectors;
 @Mod("restricted")
 public class Restricted
 {
+
     // Directly reference a log4j logger.
     private static final Logger LOGGER = LogManager.getLogger();
+    public static final String NAME = "Restricted";
+    private Boolean i = false;
 
     public Restricted() {
         // Register the setup method for modloading
@@ -32,7 +41,17 @@ public class Restricted
         // Register the processIMC method for modloading
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::processIMC);
 
+        //ModLoadingContext context = ModLoadingContext.get();
         // Register ourselves for server and other game events we are interested in
+        ModList.get().forEachModContainer((modId, container) -> {
+            if (modId.equals("configured")) {
+                i = false;
+                LOGGER.debug("Found Configured, not loading config.");
+            }
+        });
+        if (i) {
+            ModLoadingContext.get().registerExtensionPoint(ConfigGuiHandler.ConfigGuiFactory.class, () -> new ConfigGuiHandler.ConfigGuiFactory((mc, screen) -> new ConfigScreen()));
+        }
         MinecraftForge.EVENT_BUS.register(this);
     }
 

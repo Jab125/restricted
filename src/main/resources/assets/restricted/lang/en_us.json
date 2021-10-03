@@ -1,4 +1,6 @@
 {
     "menu.playworld": "Play World",
-    "title.multiplayer.disabled.restricted": "Restricted"
+    "title.multiplayer.disabled.restricted": "Restricted",
+    "restricted.gui.done": "Done",
+    "menu.comingSoon": "Coming Soon"
 }

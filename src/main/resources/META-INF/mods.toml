@@ -33,7 +33,7 @@ logoFile="restricted.png" #optional
 # A text field displayed in the mod UI
 authors="Jab125" #optional
 # The description text for the mod (multi line!) (#mandatory)
-description='''Mixins go brrrrrrrrrrrrr'''
+description='''RESTRICTS YOUR [[Game]]] TO ONE [[World]]'''
 # A dependency - use the . to indicate dependency for a specific modid. Dependencies are optional.
 [[dependencies.restricted]] #optional
     # the modid of the dependency
@@ -54,3 +54,6 @@ description='''Mixins go brrrrrrrrrrrrr'''
     versionRange="[1.17.1,1.18)"
     ordering="NONE"
     side="BOTH"
+[modproperties.restricted]
+    catalogueItemIcon="minecraft:barrier"
+    configuredBackground="minecraft:textures/block/dirt"
